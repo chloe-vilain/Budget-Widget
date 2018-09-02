@@ -10,17 +10,43 @@ class GUI(tk.Frame):
 		self.createWidgets()
 
 	def createWidgets(self):
-		self.lodgingScale = tk.Scale(self, orient=tk.HORIZONTAL, from_ = 0, to = 1000, length = 300, label = 'Lodging Cost', command = self.budget.set_lodging_mon)
-		self.incidentalScale = tk.Scale(self, orient=tk.HORIZONTAL, from_ = 0, to = 1000, length = 300, label = 'Incidental Cost', command = self.budget.set_incidental_mon)
-		m = self.budget.get_months_remaining()
-		self.budgetStatus = tk.Label(text = "Monthly burndown: foo Total months: %r" %m) #BUG HERE
-		self.quitButton = tk.Button(self, text = 'Quit', command = self.quit)
+		self.create_lodgingScale()
+		self.create_incidentalScale()	
+		self.create_budgetStatus()
+		self.create_quitButton()
+
+	def create_lodgingScale(self, from_ = 0, to = 1000, length = 300):
+		self.lodgingScale = tk.Scale(self, orient=tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Lodging Cost', command = self.update_lodging_cost)
 		self.lodgingScale.grid()
+
+	def create_incidentalScale(self, from_ = 0, to = 1000, length = 300):
+		self.incidentalScale = tk.Scale(self, orient=tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Incidental Cost', command = self.update_incidental_cost)
 		self.incidentalScale.grid()
+
+	def create_budgetStatus(self):
+		self.budgetStatus = tk.Label()
+		self.update_budgetStatus()
 		self.budgetStatus.grid()
+
+	def create_quitButton(self):
+		self.quitButton = tk.Button(self, text = 'Quit', command = self.quit)
 		self.quitButton.grid()
+
+	def update_lodging_cost(self, new):
+		self.budget.set_lodging_mon(new)
+		self.update_budgetStatus()
+
+	def update_incidental_cost(self, new):
+		self.budget.set_incidental_mon(new)
+		self.update_budgetStatus()
+
+	def update_budgetStatus(self):
+		m = self.budget.get_months_remaining()
+		b = self.budget.get_burndown_rate()
+		self.budgetStatus.configure(text = "Monthly burndown: %r Total months: %r" %(b, m))
 
 my_budget = Budget(27000, 400, 100, 400, 400)
 app = GUI(my_budget)
 app.master.title('Budget Application')
 app.mainloop()
+

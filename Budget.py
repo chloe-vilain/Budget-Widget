@@ -21,6 +21,15 @@ class Budget(object):
 	def get_months_remaining(self):
 		return self.savings/ self.get_burndown_rate()
 
+	def set_lodging_mon(self, new):
+		self.lodging_mon = int(new)
+		#print self.lodging_mon
+
+	def set_incidental_mon(self, new):
+		self.incidental_mon = int(new)
+		#print type (self.incidental_mon)
+		#print self.get_months_remaining()
+
 my_budget = Budget(27000, 400, 100, 400, 400)
 print my_budget.get_burndown_rate()
 print my_budget.get_months_remaining()  

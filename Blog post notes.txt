@@ -1,1 +1,28 @@
 Blog post notes 
+
+Context: 
+- In the GUI class, I instanciate a number of widgets (sliders, text etc)
+- I've already refactored my code to be MVC friendly -- create helper functions 
+which update the values in the Budget class 
+- I currently have one single giant function which creates all the widgets per
+my needs. I know that this isn't right.
+- I was wondering which is the best way to fix it -- by creating individual functions 
+for each widget, or by creating a 'Build' and 'Configure' function
+
+With the Builder design pattern, would specify which elements would need to be created in the GUI class. In Python, provide scaffolding. Then could create subclasses ex. Chloe's Budget and Joey's Budget, which would have different rules for instanciating the values and the scales in the GUI. Chloe's Budget and Joey's Budget are the concrete builders; GUI is the abstract interface which outlines the different widgets supported.
+
+Factory pattern is useful when class doesn't know how many objects it needs to create. For example, if Chloe and Joey's budgets have different numbers of elements included. Creator class may be abstract or it may define the default implementation. The latter is probably the best option for this app, which specifically targets Chloe budget but could also be used for Joey Budget. 
+
+W Factory method, I would abstractly define the types of inputs a user could enter in the UI (ex one-time costs, monthly costs, income streams), and use subclasses to specify the differences for different applications (ex. Joey budget, Chloe Budget).
+
+With the Builder class, I would specify the different elements required (ex. rent, discretionary, etc) in an interface. Would build a class which implements the interface. Could create multiple classes like this -- for example, if there is different underlying logic for how elements are managed/ instanciated for Chloe/ Joey.  
+
+W Factory, can also paramaterize Creator to know which type to create (ex. 'Mine' or 'Yours') based on input. 
+
+Maze example:
+OG function defines a maze completely in a single function defining the maze
+Builder function defines different functions for creating rooms, doors, etc in an abstract interface. Subclasses define specific implementation of the functions.
+With Factory pattern, define the factory methods in the parent. Different games can subclass the methods to provide unique functionality.
+
+After reading about these two patterns, I came to realize that they are both overkill for what I am doing; however, the 
+underlying concept (of making my code more modular) is relevant.
