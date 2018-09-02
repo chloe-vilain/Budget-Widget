@@ -12,7 +12,10 @@ class GUI(tk.Frame):
 	def createWidgets(self):
 		self.create_lodgingScale()
 		self.create_carScale()
-		self.create_incidentalScale()	
+		self.create_healthScale()
+		self.create_foodScale()
+		self.create_subscriptionScale()	
+		self.create_incidentalScale()
 		self.create_budgetStatus()
 		self.create_quitButton()
 
@@ -22,10 +25,24 @@ class GUI(tk.Frame):
 		self.lodgingScale.grid()
 
 	def create_carScale(self, from_ = 0, to = 700, length = 300):
-		self.carScale = tk.Scale(self, orient=tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Car Cost', command = self.update_car_cost)
+		self.carScale = tk.Scale(self, orient = tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Car Cost', command = self.update_car_cost)
 		self.carScale.set(self.budget.car_mon)
 		self.carScale.grid()
 
+	def create_healthScale(self, from_ = 0, to = 500, length = 300):
+		self.healthScale = tk.Scale(self, orient = tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Health Scale', command = self.update_health_cost)
+		self.healthScale.set(self.budget.health_mon)
+		self.healthScale.grid()
+
+	def create_foodScale(self, from_ = 0, to = 400, length = 300):
+		self.foodScale = tk.Scale(self, orient = tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Food Scale', command = self.update_food_cost)
+		self.foodScale.set(self.budget.food_mon)
+		self.foodScale.grid()		
+
+	def create_subscriptionScale(self, from_ = 0, to = 200, length = 300):
+		self.subscriptionScale = tk.Scale(self, orient = tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Subscription Scale', command = self.update_subscription_cost)
+		self.subscriptionScale.set(self.budget.subscription_mon)
+		self.subscriptionScale.grid()
 
 	def create_incidentalScale(self, from_ = 0, to = 1000, length = 300):
 		self.incidentalScale = tk.Scale(self, orient=tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Incidental Cost', command = self.update_incidental_cost)
@@ -49,6 +66,18 @@ class GUI(tk.Frame):
 		self.budget.set_car_mon(new)
 		self.update_budgetStatus()
 
+	def update_health_cost(self, new):
+		self.budget.set_health_mon(new)
+		self.update_budgetStatus()
+
+	def update_food_cost(self, new):
+		self.budget.set_food_mon(new)
+		self.update_budgetStatus()
+
+	def update_subscription_cost(self, new):
+		self.budget.set_subscription_mon(new)
+		self.update_budgetStatus()
+
 	def update_incidental_cost(self, new):
 		self.budget.set_incidental_mon(new)
 		self.update_budgetStatus()
@@ -58,7 +87,7 @@ class GUI(tk.Frame):
 		b = self.budget.get_burndown_rate()
 		self.budgetStatus.configure(text = "Monthly burndown: %r Total months: %r" %(b, m))
 
-my_budget = Budget(27000, 400, 400, 100, 400, 400)
+my_budget = Budget(27000, 400, 400, 250, 200, 50, 100, 400, 400)
 app = GUI(my_budget)
 app.master.title('Budget Application')
 app.mainloop()

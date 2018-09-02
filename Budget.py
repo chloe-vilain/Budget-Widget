@@ -4,12 +4,15 @@ class Budget(object):
 	can be set from the GUI class
 	"""
 
-	def __init__(self, savings, lodging_mon, car_mon, gas_mon, fixed_costs_mon, incidental_mon):
+	def __init__(self, savings, lodging_mon, car_mon, health_mon, food_mon, subscription_mon, gas_mon, fixed_costs_mon, incidental_mon):
 		""" Initialize the budget program
 		"""
 		self.savings = savings
 		self.lodging_mon = lodging_mon
 		self.car_mon = car_mon
+		self.health_mon = health_mon
+		self.food_mon = food_mon
+		self.subscription_mon = subscription_mon
 		self.gas_mon = gas_mon
 		self.fixed_costs_mon = fixed_costs_mon
 		self.incidental_mon = incidental_mon
@@ -17,7 +20,7 @@ class Budget(object):
 	def get_burndown_rate(self):
 		""" Return the monthly burn-down rate based on all known costs
 		"""
-		return self.lodging_mon + self.car_mon + self.gas_mon + self.fixed_costs_mon + self.incidental_mon
+		return self.lodging_mon + self.car_mon + self.health_mon + self.food_mon + self.subscription_mon + self.gas_mon + self.fixed_costs_mon + self.incidental_mon
 
 	def get_months_remaining(self):
 		return self.savings/ self.get_burndown_rate()
@@ -30,6 +33,15 @@ class Budget(object):
 
 	def set_car_mon(self, new):
 		self.car_mon = int(new)
+
+	def set_health_mon(self, new):
+		self.health_mon = int(new)
+
+	def set_food_mon(self, new):
+		self.food_mon = int(new)
+
+	def set_subscription_mon(self, new):
+		self.subscription_mon = int(new)
 """
 my_budget = Budget(27000, 400, 400, 100, 400, 400)
 print my_budget.get_burndown_rate()
