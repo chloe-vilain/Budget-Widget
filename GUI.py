@@ -24,7 +24,7 @@ class GUI(tk.Frame):
 		self.create_quitButton()
 
 	def create_newExpenseRec(self, expenseRec):
-		self.expensesRec.append(tk.Scale(self, orient = tk.HORIZONTAL, from_ = expenseRec.from_, to = expenseRec.to, length = 300, label = expenseRec.name, command = expenseRec.set_current))
+		self.expensesRec.append(tk.Scale(self, orient = tk.HORIZONTAL, from_ = expenseRec.from_, to = expenseRec.to, length = 300, label = expenseRec.name, command = lambda x:[expenseRec.set_current(x), self.update_budgetStatus()]))
 		self.expensesRec[-1].set(expenseRec.current)
 		self.expensesRec[-1].grid()
 
@@ -95,6 +95,7 @@ class GUI(tk.Frame):
 	def update_budgetStatus(self):
 		m = self.budget.get_months_remaining()
 		b = self.budget.get_burndown_rate()
+		print "foo"
 		self.budgetStatus.configure(text = "Monthly burndown: %r Total months: %r" %(b, m))
 
 my_budget = Budget(27000, 400, 400, 250, 200, 50, 100, 400, 400)
