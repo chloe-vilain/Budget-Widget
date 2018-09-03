@@ -5,7 +5,10 @@ class ExpenseRec(object):
 	used by the GUI"""
 
 	def __init__(self, name, from_, to, current):
-		"""Create a scale object."""
+		"""Create an ExpenseRec object, which represents a 
+		recurring expense. Attributes include: name, the expense label (str);
+		from_, the min value (int); to, the max value (int); current, the value
+		currently set (str) """
 		self.name = name
 		self.from_ = from_
 		self.to = to
