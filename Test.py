@@ -5,7 +5,7 @@ design paradigm
 
 from Budget import Budget
 from GUI import GUI
-from Expense_Rec import Expense_Rec
+from ExpenseRec import ExpenseRec
 #import Tkinter as tk 
 
 #Creates a new budget
