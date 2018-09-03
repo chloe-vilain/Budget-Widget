@@ -1,12 +1,11 @@
 import Tkinter as tk
 
 class ExpenseRec(object):
-	""" Class defining ExpenseRec objects, which are
-	used by the GUI"""
+	""" Class defining ExpenseRec objects, which represents a 
+		recurring expense. """
 
 	def __init__(self, name, from_, to, current):
-		"""Create an ExpenseRec object, which represents a 
-		recurring expense. Attributes include: name, the expense label (str);
+		"""Create an ExpenseRec object. Attributes include: name, the expense label (str);
 		from_, the min value (int); to, the max value (int); current, the value
 		currently set (str) """
 		self.name = name
