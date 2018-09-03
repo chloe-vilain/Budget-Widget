@@ -1,11 +1,13 @@
 import Tkinter as tk
 from Budget import Budget
+from Expense_Rec import Expense_Rec
 
 class GUI(tk.Frame):
 
 	def __init__(self, budget, master = None):
 		self.budget = budget
 		tk.Frame.__init__(self, master)
+		self.expensesRec = []
 		self.grid()
 		self.createWidgets()
 
@@ -16,8 +18,16 @@ class GUI(tk.Frame):
 		self.create_foodScale()
 		self.create_subscriptionScale()	
 		self.create_incidentalScale()
+		example = Expense_Rec("test", 0, 100, 50)
+		self.create_newExpenseRec(example)
 		self.create_budgetStatus()
 		self.create_quitButton()
+
+	def create_newExpenseRec(self, expenseRec):
+		self.expensesRec.append(tk.Scale(self, orient = tk.HORIZONTAL, from_ = expenseRec.from_, to = expenseRec.to, length = 300, label = expenseRec.name))
+		self.expensesRec[-1].set(expenseRec.current)
+		self.expensesRec[-1].grid()
+
 
 	def create_lodgingScale(self, from_ = 0, to = 1000, length = 300):
 		self.lodgingScale = tk.Scale(self, orient=tk.HORIZONTAL, from_ = from_, to = to, length = length, label = 'Lodging Cost', command = self.update_lodging_cost)

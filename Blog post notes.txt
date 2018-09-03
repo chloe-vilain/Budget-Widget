@@ -26,3 +26,6 @@ With Factory pattern, define the factory methods in the parent. Different games 
 
 After reading about these two patterns, I came to realize that they are both overkill for what I am doing; however, the 
 underlying concept (of making my code more modular) is relevant.
+
+I'm going to leverage the 'strangler' strategy in my refactor -- I'm going to write a new function to generate sliders, confirm it works, and then migrate my old code to
+leverage it.
