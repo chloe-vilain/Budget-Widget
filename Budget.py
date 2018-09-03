@@ -1,3 +1,4 @@
+from Expense_Rec import Expense_Rec
 
 class Budget(object):
 	"""Class for calculating my budget based on fixed and variable costs, which 
@@ -16,6 +17,12 @@ class Budget(object):
 		self.gas_mon = gas_mon
 		self.fixed_costs_mon = fixed_costs_mon
 		self.incidental_mon = incidental_mon
+		self.expenses_rec = []
+		#example = Expense_Rec("test", 0, 100, 50)
+		self.create_newExpenseRec("test", 0, 100, 50)
+
+	def create_newExpenseRec(self, name, from_, to, start_val):
+		self.expenses_rec.append(Expense_Rec(name, from_, to, start_val))
 
 	def get_burndown_rate(self):
 		""" Return the monthly burn-down rate based on all known costs

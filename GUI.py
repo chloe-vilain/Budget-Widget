@@ -18,13 +18,13 @@ class GUI(tk.Frame):
 		self.create_foodScale()
 		self.create_subscriptionScale()	
 		self.create_incidentalScale()
-		example = Expense_Rec("test", 0, 100, 50)
-		self.create_newExpenseRec(example)
+		for expense_rec in self.budget.expenses_rec:
+			self.create_newExpenseRec(expense_rec)
 		self.create_budgetStatus()
 		self.create_quitButton()
 
 	def create_newExpenseRec(self, expenseRec):
-		self.expensesRec.append(tk.Scale(self, orient = tk.HORIZONTAL, from_ = expenseRec.from_, to = expenseRec.to, length = 300, label = expenseRec.name))
+		self.expensesRec.append(tk.Scale(self, orient = tk.HORIZONTAL, from_ = expenseRec.from_, to = expenseRec.to, length = 300, label = expenseRec.name, command = expenseRec.set_current))
 		self.expensesRec[-1].set(expenseRec.current)
 		self.expensesRec[-1].grid()
 

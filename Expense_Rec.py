@@ -13,7 +13,8 @@ class Expense_Rec(object):
 
 	def set_current(self, new):
 		"""Updates the current value of the expense"""
-		self.current = current 
+		self.current = new 
+		#print self.current
 
 
 
