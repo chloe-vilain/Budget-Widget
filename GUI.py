@@ -61,6 +61,6 @@ class GUI(tk.Frame):
 		"""Updates the budget status string. Called when a slider is updated."""
 		m = self.budget.get_months_remaining()
 		b = self.budget.get_burndown_rate()
-		self.budget_status.configure(text = "Monthly burndown: %r Total months: %r" %(b, m))
+		self.budget_status.configure(text = "Monthly burndown: %r Total months: %r" % (b, m))
 
 

@@ -1,9 +1,16 @@
 from ExpenseRec import ExpenseRec
+import random
+import string
+import csv
+
 
 class Budget(object):
 	"""Class for calculating my budget based on fixed and variable costs, which 
 	can be set from the GUI class
 	"""
+
+	field_names = ['id_', 'name', 'from_', 'to', 'current', 'deleted']
+
 
 	def __init__(self, savings, save_file = None):
 		""" Initializes the budget program with the amount in savings.
@@ -17,23 +24,36 @@ class Budget(object):
 	def get_saved_expenses_rec(self):
 		""" 
 		"""
-		if self.save_file == None:
-			"""TO ADD: Create a file to save to. 
-			"""
+		if self.save_file is None:
+			self.save_file = ''.join(random.choice(string.ascii_uppercase 
+							+ string.ascii_lowercase + string.digits) 
+							for _ in range(16)) + '.csv'
+			with open(self.save_file, 'w+') as save_file:
+				csv.DictWriter(save_file, Budget.field_names).writeheader()
+			print self.save_file
 			return []
 		else:
 			"""TO ADD: read file from CSV
 			Create an expense object for each non-deleted line in the CSV.
-			Return a list of expense objects.
-			"""
+			Return a list of expense objects."""
 			return []
 
 	def create_expense_rec(self, id_, name, from_, to, start_val):
 		"""Adds an ExpenseRec object to the expenses_rec list.
 		"""
-		self.expenses_rec.append(ExpenseRec(id_, name, from_, to, start_val))
-		"""TO ADD: Write the line to CSV file 
-		"""
+		new = ExpenseRec(id_, name, from_, to, start_val)
+		self.expenses_rec.append(new)
+		self.add_expense_to_file(new)
+
+	def add_expense_to_file(self, new):
+		with open(self.save_file, 'a') as save_file:
+			csv.DictWriter(save_file, fieldnames = Budget.field_names).writerow(
+				{'id_' : new.id_,
+				'name' : new.name,
+				'from_': new.from_,
+				'to' : new.to,
+				'current': new.current,
+				'deleted': new.deleted})
 
 	def get_burndown_rate(self):
 		""" Returns the monthly burn-down rate based on all known costs
@@ -47,7 +67,7 @@ class Budget(object):
 		"""Returns the total months remaining based on the start savings
 		and the monthly burn-down rate. 
 		"""
-		return self.savings/ self.get_burndown_rate()
+		return self.savings / self.get_burndown_rate()
 
 	def save(self):
 		#print "foo"
