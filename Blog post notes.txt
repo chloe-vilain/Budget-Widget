@@ -29,3 +29,6 @@ underlying concept (of making my code more modular) is relevant.
 
 I'm going to leverage the 'strangler' strategy in my refactor -- I'm going to write a new function to generate sliders, confirm it works, and then migrate my old code to
 leverage it.
+
+
+

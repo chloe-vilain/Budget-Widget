@@ -6,19 +6,23 @@ design paradigm
 from Budget import Budget
 from GUI import GUI
 from ExpenseRec import ExpenseRec
+from BudgetStoreCSV import BudgetStoreCSV
 #import Tkinter as tk 
 
 #Creates a new budget
-"""chloe_budget = Budget(27000)
+budget_store_csv = BudgetStoreCSV()
+chloe_budget = Budget(27000, budget_store_csv)
 chloe_budget.create_expense_rec(1, "Lodging", 0, 1000, 400)
 chloe_budget.create_expense_rec(2, "Car", 0, 700, 400)
 chloe_budget.create_expense_rec(3, "Health", 0, 500, 250)
 chloe_budget.create_expense_rec(4, "Food", 0, 400, 200)
 chloe_budget.create_expense_rec(4, "Subscriptions", 0, 200, 50)
-chloe_budget.create_expense_rec(5, "Incidental", 0, 800, 500)"""
+chloe_budget.create_expense_rec(5, "Incidental", 0, 800, 500)
+
 
 #Opens an existing budget
-chloe_budget = Budget(27000, 'Iwo3GwPQGNdd9y35.csv')
+#budget_store_csv = BudgetStoreCSV()
+#chloe_budget = Budget(27000, budget_store_csv, 'Iwo3GwPQGNdd9y35.csv')
 
 
 #Test calculations for budget

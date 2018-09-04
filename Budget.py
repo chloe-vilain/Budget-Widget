@@ -1,6 +1,5 @@
 from ExpenseRec import ExpenseRec
-import random
-import string
+
 import csv
 
 
@@ -12,13 +11,14 @@ class Budget(object):
 	field_names = ['id_', 'name', 'from_', 'to', 'current', 'deleted']
 
 
-	def __init__(self, savings, save_file = None):
+	def __init__(self, savings, budget_store, save_location = None):
 		""" Initializes the budget program with the amount in savings.
 		Creates an empty expense_rec list, which represents the list of 
 		recurring expenses.
 		"""
 		self.savings = savings
-		self.save_file = save_file
+		self.budget_store = budget_store
+		self.save_location = save_location
 		self.expenses_rec = []
 		self.get_saved_expenses_rec()
 
@@ -26,14 +26,10 @@ class Budget(object):
 		""" If save file exists, creates an expense for each entry in the file.
 		If it does not exist, create a new save file.
 		"""
-		if self.save_file is None:
-			self.save_file = ''.join(random.choice(string.ascii_uppercase 
-							+ string.ascii_lowercase + string.digits) 
-							for _ in range(16)) + '.csv'
-			with open(self.save_file, 'w+') as save_file:
-				csv.DictWriter(save_file, Budget.field_names).writeheader()
+		if self.save_location is None:
+			self.save_location = self.budget_store.create()
 		else:
-			with open(self.save_file) as save_file:
+			with open(self.save_location) as save_file:
  				for row in csv.DictReader(save_file):
  					if row['deleted'] == 'False':
 	 					self.create_expense_rec(
@@ -50,19 +46,7 @@ class Budget(object):
 		self.expenses_rec.append(new)
 
 	def save(self):
-		""" Saves current app state to csv file save_file
-		"""
-		with open(self.save_file, 'w') as save_file:
-			writer = csv.DictWriter(save_file, Budget.field_names)
-			writer.writeheader()
-			for expense_rec in self.expenses_rec:
-				writer.writerow(
-					{'id_' : expense_rec.id_,
-					'name' : expense_rec.name,
-					'from_': expense_rec.from_,
-					'to' : expense_rec.to,
-					'current': expense_rec.current,
-					'deleted': expense_rec.deleted})
+		self.budget_store.write(self.expenses_rec, self.save_location)
 
 	def get_burndown_rate(self):
 		""" Returns the monthly burn-down rate based on all known costs
