@@ -5,18 +5,35 @@ class Budget(object):
 	can be set from the GUI class
 	"""
 
-	def __init__(self, savings):
+	def __init__(self, savings, save_file = None):
 		""" Initializes the budget program with the amount in savings.
 		Creates an empty expense_rec list, which represents the list of 
 		recurring expenses.
 		"""
 		self.savings = savings
-		self.expenses_rec = []
+		self.save_file = save_file
+		self.expenses_rec = self.get_saved_expenses_rec()
 
-	def create_expense_rec(self, name, from_, to, start_val):
+	def get_saved_expenses_rec(self):
+		""" 
+		"""
+		if self.save_file == None:
+			"""TO ADD: Create a file to save to. 
+			"""
+			return []
+		else:
+			"""TO ADD: read file from CSV
+			Create an expense object for each non-deleted line in the CSV.
+			Return a list of expense objects.
+			"""
+			return []
+
+	def create_expense_rec(self, id_, name, from_, to, start_val):
 		"""Adds an ExpenseRec object to the expenses_rec list.
 		"""
-		self.expenses_rec.append(ExpenseRec(name, from_, to, start_val))
+		self.expenses_rec.append(ExpenseRec(id_, name, from_, to, start_val))
+		"""TO ADD: Write the line to CSV file 
+		"""
 
 	def get_burndown_rate(self):
 		""" Returns the monthly burn-down rate based on all known costs
@@ -31,6 +48,11 @@ class Budget(object):
 		and the monthly burn-down rate. 
 		"""
 		return self.savings/ self.get_burndown_rate()
+
+	def save(self):
+		#print "foo"
+		pass 
+
 
 
 

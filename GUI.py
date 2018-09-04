@@ -20,8 +20,9 @@ class GUI(tk.Frame):
 		create_expense_slider to instanciate them.   
 		"""
 		for expense_rec in self.budget.expenses_rec:
-			self.create_expense_slider(expense_rec)		
+			self.create_expense_slider(expense_rec)	
 		self.create_budget_status()
+		self.create_save_button()
 		self.create_quit_button()
 
 	def create_expense_slider(self, expense_rec):
@@ -45,6 +46,11 @@ class GUI(tk.Frame):
 		self.budget_status = tk.Label()
 		self.update_budget_status()
 		self.budget_status.grid()
+
+	def create_save_button(self):
+		"""Creates a save button and adds it to the grid"""
+		self.save_button = tk.Button(self, text = 'Save', command = self.budget.save)
+		self.save_button.grid()
 
 	def create_quit_button(self):
 		"""Creates the quit button and adds it to the grid"""
