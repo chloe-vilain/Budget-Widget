@@ -11,16 +11,13 @@ class Budget(object):
 	field_names = ['id_', 'name', 'from_', 'to', 'current', 'deleted']
 
 
-	def __init__(self, savings, budget_store, save_location = None):
+	def __init__(self, savings): 
 		""" Initializes the budget program with the amount in savings.
 		Creates an empty expense_rec list, which represents the list of 
 		recurring expenses.
 		"""
 		self.savings = savings
-		self.budget_store = budget_store
-		self.save_location = save_location
 		self.expenses_rec = []
-		self.get_saved_expenses_rec()
 
 	def get_saved_expenses_rec(self):
 		""" If save file exists, creates an expense for each entry in the file.
@@ -60,7 +57,10 @@ class Budget(object):
 		"""Returns the total months remaining based on the start savings
 		and the monthly burn-down rate. 
 		"""
-		return self.savings / self.get_burndown_rate()
+		try:
+			return self.savings / self.get_burndown_rate()
+		except ZeroDivisionError:
+			return 'N/A'  
 
 
 

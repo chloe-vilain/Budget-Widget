@@ -5,17 +5,30 @@ class BudgetStore(object):
 	"""
 	__metaclass__ = abc.ABCMeta
 
-	field_names = ['id_', 'name', 'from_', 'to', 'current', 'deleted']
+	field_names_exp = ['id_', 'name', 'from_', 'to', 'current', 'deleted']
+	field_names_sav = ['id_', 'savings']
 
 	@abc.abstractmethod
-	def create(self):
-		""" Create a new store
+	def create(self, save_name = None):
+		""" Create a new store.
+
+		parameters:
+		- save_name: str - optional name for save file. Must support 
+		constructing store using name provided, and constructing store generating
+		name if name not provided.
+
+		Returns location_exp - represents save location for expenses data
 		"""
-		return
 
 	@abc.abstractmethod
 	def read(self, location):
 		""" Read data from store
+
+		parameters:
+		- location: - (str, str) - Tuple of strings representing expenses, savings
+		save locations.
+
+		Returns budget: Budget - The Budget object leveraged by the application.
 		"""
 		return 
 

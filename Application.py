@@ -16,6 +16,7 @@ class Application(object):
 			self.budget = self.budget_store.read(save)
 		else: 
 			self.budget = Budget(savings)
+		self.add_initial_expenses()
 		self.GUI = GUI(self.budget, self.budget_store)
 		self.GUI.mainloop()
 
@@ -27,6 +28,14 @@ class Application(object):
 			return BudgetStoreCSV()
 		else:
 			raise ValueError('Budget store preference not recognized')
+
+	def add_initial_expenses(self):
+		self.budget.create_expense_rec(1, "Lodging", 0, 1000, 400)
+		self.budget.create_expense_rec(2, "Car", 0, 700, 400)
+		self.budget.create_expense_rec(3, "Health", 0, 500, 250)
+		self.budget.create_expense_rec(4, "Food", 0, 400, 200)
+		self.budget.create_expense_rec(5, "Subscriptions", 0, 200, 50)
+
 
 
 

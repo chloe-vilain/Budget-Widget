@@ -32,3 +32,4 @@ leverage it.
 
 
 
+I want to save both static values and serials but CSV 
