@@ -5,21 +5,22 @@ from GUI import GUI
 
 class Application(object):
 
-	def __init__(self, save = None, budget_store_prefer = 'csv', savings = 27000):
+	def __init__(self, location = None, budget_store_prefer = 'csv', savings = 27000):
 		"""
 		Controller class. 
 		Builds budget from a save, if save exists. 
 		If not, builds a new budget with default store type csv
 		"""
 		self.budget_store = self.choose_budget_store(budget_store_prefer)
-		self.save = save
-		if save is not None:
-			self.budget = self.budget_store.read(save)
+		self.location = location
+		if self.location is not None:
+			print '1. Location not null'
+			self.budget = self.budget_store.read(savings, self.location)
 		else: 
-			self.save = self.budget_store.create()
+			self.location = self.budget_store.create()
 			self.budget = Budget(savings)
 			self.add_initial_expenses()
-		self.GUI = GUI(self.budget, self.save, self.budget_store)
+		self.GUI = GUI(self.budget, self.location, self.budget_store)
 		self.GUI.mainloop()
 
 

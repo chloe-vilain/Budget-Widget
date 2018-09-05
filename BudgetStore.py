@@ -6,7 +6,6 @@ class BudgetStore(object):
 	__metaclass__ = abc.ABCMeta
 
 	field_names_exp = ['id_', 'name', 'from_', 'to', 'current', 'deleted']
-	field_names_sav = ['id_', 'savings']
 
 	@abc.abstractmethod
 	def create(self, save_name = None):
@@ -25,12 +24,11 @@ class BudgetStore(object):
 		""" Read data from store
 
 		parameters:
-		- location: - (str, str) - Tuple of strings representing expenses, savings
-		save locations.
+		- location: str - location to read data from 
 
 		Returns budget: Budget - The Budget object leveraged by the application.
 		"""
-		return 
+		 
 
 	@abc.abstractmethod
 	def write(self, budget, location):
@@ -39,10 +37,9 @@ class BudgetStore(object):
 		parameters:
 		 - budget: Budget object to store.  Note- savings not storable today
 		 - location: str - Save location 
-		 - name - type - description
 
-		 returns: 
+		Returns null
 		"""
-		return
+		
 
 
