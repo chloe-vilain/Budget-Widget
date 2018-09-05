@@ -16,7 +16,9 @@ class BudgetStoreCSV(BudgetStore):
 			location = ''.join(random.choice(string.ascii_uppercase 
 						+ string.ascii_lowercase + string.digits) 
 						for _ in range(16))
-		location_exp = '%r_exp.csv' %location
+			print location
+		location_exp = '%s_exp.csv' %location
+		print location_exp
 		with open(location_exp, 'w+') as save_file:
 				csv.DictWriter(save_file, BudgetStore.field_names_exp).writeheader()
 		return location_exp
@@ -24,11 +26,11 @@ class BudgetStoreCSV(BudgetStore):
 	def read(self, location):
 		print 'foo'
 
-	def write(self, expenses, location):
+	def write(self, budget, location):
 		with open(location, 'w') as save_file:
-			writer = csv.DictWriter(save_file, BudgetStore.field_names_exp)
+			writer = csv.DictWriter(save_file, fieldnames = BudgetStore.field_names_exp)
 			writer.writeheader()
-			for expense in expenses:
+			for expense in budget.expenses_rec:
 				writer.writerow(
 					{'id_' : expense.id_,
 					'name' : expense.name,

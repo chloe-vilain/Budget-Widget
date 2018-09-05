@@ -33,12 +33,12 @@ class BudgetStore(object):
 		return 
 
 	@abc.abstractmethod
-	def write(self, expenses, location):
+	def write(self, budget, location):
 		""" Save date to store
 
 		parameters:
-		 - expense: type?
-		 - location - type
+		 - budget: Budget object to store.  Note- savings not storable today
+		 - location: str - Save location 
 		 - name - type - description
 
 		 returns: 

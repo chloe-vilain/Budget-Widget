@@ -12,12 +12,14 @@ class Application(object):
 		If not, builds a new budget with default store type csv
 		"""
 		self.budget_store = self.choose_budget_store(budget_store_prefer)
+		self.save = save
 		if save is not None:
 			self.budget = self.budget_store.read(save)
 		else: 
+			self.save = self.budget_store.create()
 			self.budget = Budget(savings)
-		self.add_initial_expenses()
-		self.GUI = GUI(self.budget, self.budget_store)
+			self.add_initial_expenses()
+		self.GUI = GUI(self.budget, self.save, self.budget_store)
 		self.GUI.mainloop()
 
 
@@ -30,6 +32,10 @@ class Application(object):
 			raise ValueError('Budget store preference not recognized')
 
 	def add_initial_expenses(self):
+		"""TO DEPRECATE
+		Function added to test creating new sliders, w/o having 
+		to add a UI flow to add sliders. 
+		"""
 		self.budget.create_expense_rec(1, "Lodging", 0, 1000, 400)
 		self.budget.create_expense_rec(2, "Car", 0, 700, 400)
 		self.budget.create_expense_rec(3, "Health", 0, 500, 250)

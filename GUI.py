@@ -4,7 +4,7 @@ from ExpenseRec import ExpenseRec
 
 class GUI(tk.Frame):
 
-	def __init__(self, budget, budget_store, master = None):
+	def __init__(self, budget, location, budget_store, master = None):
 		""" Takes a Budget object and creates the GUI framework.
 		Calls create_widgets to instanciate all visual elements.
 		"""
@@ -12,9 +12,9 @@ class GUI(tk.Frame):
 		tk.Frame.__init__(self, master)
 		self.expenses_rec = []
 		self.grid()
-		self.create_widgets(budget, budget_store)
+		self.create_widgets(budget, location, budget_store)
 
-	def create_widgets(self, budget, budget_store):
+	def create_widgets(self, budget, location, budget_store):
 		""" Creates all hard-coded widgets in the budget application. 
 		Iterates over expense objects in the GUI's budget and calls 
 		create_expense_slider to instanciate them.   
@@ -22,7 +22,7 @@ class GUI(tk.Frame):
 		for expense_rec in budget.expenses_rec:
 			self.create_expense_slider(expense_rec, budget)	
 		self.create_budget_status(budget)
-		self.create_save_button(budget_store)
+		self.create_save_button(budget, location, budget_store)
 		self.create_quit_button()
 
 	def create_expense_slider(self, expense_rec, budget):
@@ -47,9 +47,10 @@ class GUI(tk.Frame):
 		self.update_budget_status(budget)
 		self.budget_status.grid()
 
-	def create_save_button(self, budget_store):
+	def create_save_button(self, budget, location, budget_store):
 		"""Creates a save button and adds it to the grid"""
-		self.save_button = tk.Button(self, text = 'Save', command = budget_store.write)
+		self.save_button = tk.Button(self, text = 'Save', 
+			command = budget_store.write(budget, location))
 		self.save_button.grid()
 
 	def create_quit_button(self):
