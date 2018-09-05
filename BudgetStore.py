@@ -12,7 +12,7 @@ class BudgetStore(object):
 		""" Create a new store.
 
 		parameters:
-		- save_name: str - optional name for save file. Must support 
+		- save_name: str (optional) - name for save file. create must support 
 		constructing store using name provided, and constructing store generating
 		name if name not provided.
 
@@ -38,7 +38,7 @@ class BudgetStore(object):
 		 - budget: Budget object to store.  Note- savings not storable today
 		 - location: str - Save location 
 
-		Returns null
+		Returns None 
 		"""
 		
 

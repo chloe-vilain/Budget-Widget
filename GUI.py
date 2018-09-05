@@ -50,8 +50,7 @@ class GUI(tk.Frame):
 	def create_save_button(self, budget, location, budget_store):
 		"""Creates a save button and adds it to the grid"""
 		onclick = lambda: budget_store.write(budget, location)
-		self.save_button = tk.Button(self, text = 'Save', 
-			command = onclick)
+		self.save_button = tk.Button(self, text = 'Save', command = onclick)
 		self.save_button.grid()
 
 	def create_quit_button(self):
@@ -64,6 +63,7 @@ class GUI(tk.Frame):
 		m = budget.get_months_remaining()
 		b = budget.get_burndown_rate()
 		self.budget_status.configure(text = "Monthly burndown: %r Total months: %r" % (b, m))
+		#TODO: Improve string formatting to use int/ float/ etc instead of %r
 
 
 

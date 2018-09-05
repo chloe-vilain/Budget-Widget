@@ -18,8 +18,6 @@ class BudgetStoreCSV(BudgetStore):
 						+ string.ascii_lowercase + string.digits) 
 						for _ in range(16))
 		location_exp = '%s_exp.csv' %location
-		with open(location_exp, 'w+') as save_file:
-				csv.DictWriter(save_file, BudgetStore.field_names_exp).writeheader()
 		return location_exp
 
 	def read(self, savings, location):
@@ -28,7 +26,7 @@ class BudgetStoreCSV(BudgetStore):
 		Uses savings param since savings is not currently storable.
 		"""
 		budget = Budget(savings)
-		with open(location) as save_file:
+		with open(location, 'r') as save_file:
  			for row in csv.DictReader(save_file):
  				if row['deleted'] == 'False':
  					budget.create_expense_rec(
@@ -43,7 +41,7 @@ class BudgetStoreCSV(BudgetStore):
 		"""
 		Writes a budget object to a CSV in a given location.
 		"""
-		with open(location, 'w') as save_file:
+		with open(location, 'w+') as save_file:
 			writer = csv.DictWriter(save_file, fieldnames = BudgetStore.field_names_exp)
 			writer.writeheader()
 			for expense in budget.expenses_rec:
