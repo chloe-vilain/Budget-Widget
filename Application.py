@@ -1,12 +1,14 @@
 from Budget import Budget
 from BudgetStore import BudgetStore
 from BudgetStoreCSV import BudgetStoreCSV
+from BudgetStoreJSON import BudgetStoreJSON
 from GUI import GUI
 
 class Application(object):
 
 	budget_store_types = {
-		'csv': BudgetStoreCSV
+		'csv' : BudgetStoreCSV,
+		'json' : BudgetStoreJSON
 	}
 
 	def __init__(self, location = None, budget_store_prefer = 'csv', savings = 27000):

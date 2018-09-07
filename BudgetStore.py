@@ -8,7 +8,7 @@ class BudgetStore(object):
 	field_names_exp = ['id_', 'name', 'from_', 'to', 'current', 'deleted']
 
 	@abc.abstractmethod
-	def create(self, save_name = None):
+	def create(self, location = None):
 		""" Create a new store.
 
 		parameters:
