@@ -7,11 +7,10 @@ from GUI import GUI
 class Application(object):
 
 	budget_store_types = {
-		'csv' : BudgetStoreCSV,
 		'json' : BudgetStoreJSON
 	}
 
-	def __init__(self, location = None, budget_store_prefer = 'csv', savings = 27000):
+	def __init__(self, location = None, budget_store_prefer = 'json', savings = None):
 		"""
 		Controller class. 
 		Builds budget from a save, if save exists. 
@@ -26,8 +25,12 @@ class Application(object):
 		self.GUI.mainloop()
 
 	def generate_budget(self, savings):
+		"""
+		Reads a budget from a file, if the application is passed a save
+		file. Generates a new budget with the savings value provided, if not.
+		"""
 		if self.location is not None:
-			return self.budget_store.read(savings, self.location)
+			return self.budget_store.read(self.location)
 		else: 
 			self.location = self.budget_store.create()
 			budget = Budget(savings)
